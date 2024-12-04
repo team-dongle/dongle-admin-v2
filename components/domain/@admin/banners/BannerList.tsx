@@ -23,7 +23,7 @@ import {
 } from "@dnd-kit/modifiers";
 import { useRouter } from "next/navigation";
 import { BannerType } from "@/types/banner";
-import { deleteBanner, updateBannerOrder } from "@/apis/banner";
+import { updateBannerOrder } from "@/apis/banner";
 
 interface Props {
   banners: BannerType[];
@@ -72,18 +72,7 @@ const BannerList = ({ banners }: Props) => {
   };
 
   const deleteHandler = async (id: number) => {
-    setDisabled(true);
-    const _response = await deleteBanner(id);
-
-    if (_response.code >= 400) {
-      alert("배너 삭제중 오류가 발생하였습니다.");
-      setDisabled(false);
-      return;
-    }
-
-    setItems((prev) => prev.filter((item) => item._id !== id));
-    setDisabled(false);
-    return;
+    router.push(`/banners/delete/${id}`, { scroll: false });
   };
 
   return (
