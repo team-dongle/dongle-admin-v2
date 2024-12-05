@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import ChevronLeft from "@/assets/icons/chevron-left.svg";
 import ChevronRight from "@/assets/icons/chevron-right.svg";
@@ -12,12 +12,43 @@ interface Props {
 }
 
 const Banner = ({ banners }: Props) => {
+  const SLIDE_INTERVAL = 3000;
+  const timeout = useRef<number | null>(null);
+  const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [sliderRef, instanceRef] = useKeenSlider({
-    initial: 0,
-    loop: true,
-    created: () => setLoading(false),
-  });
+  const [sliderRef, instanceRef] = useKeenSlider(
+    {
+      initial: 0,
+      loop: true,
+      created: () => setLoading(false),
+    },
+    [
+      (slider) => {
+        const nextTimeout = () => {
+          clearTimeout(timeout.current!);
+          if (isMouseOver) return;
+          timeout.current = window.setTimeout(() => {
+            slider.next();
+          }, SLIDE_INTERVAL);
+        };
+
+        slider.on("created", () => {
+          slider.container.addEventListener("mouseover", () => {
+            setIsMouseOver(true);
+            clearTimeout(timeout.current!);
+          });
+          slider.container.addEventListener("mouseout", () => {
+            setIsMouseOver(false);
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", () => clearTimeout(timeout.current!));
+        slider.on("animationEnded", () => nextTimeout());
+        slider.on("updated", () => nextTimeout());
+      },
+    ],
+  );
 
   return (
     <div className="relative m-[0_auto] aspect-[14/3] h-auto w-full overflow-hidden rounded-lg bg-gray-300 bg-[url('/loading-oval.svg')] bg-center bg-no-repeat">
