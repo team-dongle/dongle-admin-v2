@@ -16,10 +16,10 @@ export default async function Page() {
       <h1 className="mb-12 text-3xl font-normal">
         안녕하세요, <span className="font-bold text-sky-700">{name}</span> 님!
       </h1>
-      <div className="mb-10 h-auto w-full">
+      <div className="mb-8 h-auto w-full max-md:mb-4">
         <Banner banners={bannerList.result.rows} />
       </div>
-      <div className="grid h-auto w-full grid-flow-row grid-cols-2 gap-8 max-md:grid-cols-1">
+      <div className="grid h-auto w-full grid-flow-row grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-4">
         <Section title="공지사항" linkTo="/notices">
           <Notices />
         </Section>
