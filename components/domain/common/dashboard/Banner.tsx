@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { KeenSliderInstance, useKeenSlider } from "keen-slider/react";
+import { useKeenSlider } from "keen-slider/react";
 import ChevronLeft from "@/assets/icons/chevron-left.svg";
 import ChevronRight from "@/assets/icons/chevron-right.svg";
 import { BannerType } from "@/types/banner";
@@ -14,9 +14,6 @@ interface Props {
 const Banner = ({ banners }: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [sliderRef, instanceRef] = useKeenSlider({
-    animationEnded(slider: KeenSliderInstance) {
-      setCurrentSlide(slider.track.details.rel);
-    },
     initial: 0,
     loop: true,
     created: () => setLoading(false),
