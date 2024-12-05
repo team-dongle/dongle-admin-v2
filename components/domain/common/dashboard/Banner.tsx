@@ -1,48 +1,39 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { KeenSliderInstance, useKeenSlider } from "keen-slider/react";
 import ChevronLeft from "@/assets/icons/chevron-left.svg";
 import ChevronRight from "@/assets/icons/chevron-right.svg";
 import { BannerType } from "@/types/banner";
+import clsx from "clsx";
 
 interface Props {
   banners: BannerType[];
 }
 
 const Banner = ({ banners }: Props) => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [loaded, setLoaded] = useState<boolean[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [sliderRef, instanceRef] = useKeenSlider({
     animationEnded(slider: KeenSliderInstance) {
       setCurrentSlide(slider.track.details.rel);
     },
     initial: 0,
     loop: true,
+    created: () => setLoading(false),
   });
 
-  useEffect(() => {
-    const new_loaded = [...loaded];
-    new_loaded[currentSlide] = true;
-    setLoaded(new_loaded);
-  }, [currentSlide]);
-
   return (
-    <div className="relative m-[0_auto] aspect-[14/3] h-auto w-full overflow-hidden rounded-lg bg-gray-300 bg-[url('/loading-oval.svg')] bg-center bg-no-repeat shadow">
+    <div className="relative m-[0_auto] aspect-[14/3] h-auto w-full overflow-hidden rounded-lg bg-gray-300 bg-[url('/loading-oval.svg')] bg-center bg-no-repeat">
       <div ref={sliderRef} className="keen-slider h-full w-full">
-        {banners.map((image, idx) => (
-          <div
+        {banners.map((image) => (
+          <img
             key={image._id}
-            className={`keen-slider__slide lazy__slide number-slide${idx + 1}`}
-          >
-            {loaded[idx] && (
-              <img
-                alt="서비스 배너"
-                className="h-full w-full object-cover"
-                src={image.url}
-              />
-            )}
-          </div>
+            alt={image.description}
+            className={clsx(`keen-slider__slide h-full w-full object-cover`, {
+              [`hidden`]: loading,
+            })}
+            src={image.url}
+          />
         ))}
       </div>
       {instanceRef.current && (
