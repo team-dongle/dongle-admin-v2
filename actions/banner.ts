@@ -9,7 +9,8 @@ export async function uploadBannerDispatcher(
   const payload = {
     name: formData.get("name") as string,
     description: formData.get("description") as string,
-    url: formData.get("url") as string,
+    imageUrl: formData.get("imageUrl") as string,
+    href: (formData.get("href") as string) || undefined,
   };
 
   const validate = isUploadBannerFormValid(payload);

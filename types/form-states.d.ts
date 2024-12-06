@@ -77,6 +77,7 @@ export interface UploadBannerFormState
   errors?: {
     name?: string[];
     description?: string[];
-    url?: string[];
+    imageUrl?: string[];
+    href?: string[];
   };
 }

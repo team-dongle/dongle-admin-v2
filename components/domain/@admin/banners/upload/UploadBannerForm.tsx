@@ -14,6 +14,7 @@ const UploadBannerForm = () => {
   });
 
   useEffect(() => {
+    console.log(state);
     if (!state.ok && state.formError) alert(state.formError);
     if (state.ok) window.location.href = "/banners";
   }, [state]);
@@ -44,8 +45,15 @@ const UploadBannerForm = () => {
             placeholder="배너 설명을 입력하세요."
           />
         </FormItem>
-        <FormItem label="배너 이미지" required error={state.errors?.url}>
-          <UploadBanner name="url" />
+        <FormItem label="배너 링크" required error={state.errors?.href}>
+          <Input
+            type="text"
+            name="href"
+            placeholder="배너 클릭 시 이동할 링크를 입력해 주세요."
+          />
+        </FormItem>
+        <FormItem label="배너 이미지" required error={state.errors?.imageUrl}>
+          <UploadBanner name="imageUrl" />
         </FormItem>
       </div>
       <div className="mt-4 flex h-auto w-full flex-row justify-end gap-4">

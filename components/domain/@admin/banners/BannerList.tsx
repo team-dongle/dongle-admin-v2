@@ -102,7 +102,8 @@ const BannerList = ({ banners }: Props) => {
                   id: item._id,
                   name: item.name,
                   description: item.description,
-                  url: item.url,
+                  imageUrl: item.imageUrl,
+                  href: item.href,
                 }))}
                 strategy={verticalListSortingStrategy}
               >
@@ -113,7 +114,8 @@ const BannerList = ({ banners }: Props) => {
                       id: item._id,
                       name: item.name,
                       description: item.description,
-                      url: item.url,
+                      imageUrl: item.imageUrl,
+                      href: item.href,
                       order: item.order,
                     }}
                     onDelete={deleteHandler}

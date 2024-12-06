@@ -50,7 +50,7 @@ const UploadBanner = ({ name }: Props) => {
       />
       <img
         src={image || "https://placehold.co/896x192"}
-        className="aspect-[14/3] w-full border border-gray-300"
+        className="aspect-[14/3] w-full border border-gray-300 object-cover"
       />
       <button
         type="button"

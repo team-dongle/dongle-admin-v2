@@ -6,12 +6,16 @@ import ChevronLeft from "@/assets/icons/chevron-left.svg";
 import ChevronRight from "@/assets/icons/chevron-right.svg";
 import { BannerType } from "@/types/banner";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 interface Props {
   banners: BannerType[];
 }
 
 const Banner = ({ banners }: Props) => {
+  if (banners.length <= 0) return;
+
+  const router = useRouter();
   const SLIDE_INTERVAL = 3000;
   const timeout = useRef<number | null>(null);
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
@@ -60,7 +64,8 @@ const Banner = ({ banners }: Props) => {
             className={clsx(`keen-slider__slide h-full w-full object-cover`, {
               [`hidden`]: loading,
             })}
-            src={image.url}
+            src={image.imageUrl}
+            onClick={() => image.href && router.push(image.href)}
           />
         ))}
       </div>
