@@ -7,7 +7,7 @@ const Notices = async () => {
   const notices = await getNoticeList();
 
   return (
-    <div className="h-auto w-full overflow-auto">
+    <div className="h-full w-full overflow-auto">
       {notices.result.rows.length <= 0 && (
         <div className="flex h-full w-full items-center justify-center">
           <span className="text-gray-400">등록된 공지사항이 없습니다.</span>
