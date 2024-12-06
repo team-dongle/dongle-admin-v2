@@ -28,6 +28,7 @@ const Banner = ({ banners }: Props) => {
     },
     [
       (slider) => {
+        if (banners.length === 1) return;
         const nextTimeout = () => {
           clearTimeout(timeout.current!);
           if (isMouseOver) return;
