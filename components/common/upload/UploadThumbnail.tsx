@@ -62,6 +62,7 @@ const UploadThumbnail = ({ onImageChange, defaultValue }: Props) => {
     <div className="relative flex w-full flex-col items-start justify-start gap-2">
       <input
         type="file"
+        accept=".jpg, .jpeg, .png, .gif"
         className="hidden"
         ref={imageRef}
         onChange={imageUploadHandler}

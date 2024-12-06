@@ -40,6 +40,7 @@ const UploadLogo = ({ name, defaultImage }: Props) => {
       <input type="hidden" name={name} defaultValue={image || ""} />
       <input
         type="file"
+        accept=".jpg, .jpeg, .png, .gif"
         ref={fileRef}
         className="hidden"
         onChange={uploadHandler}

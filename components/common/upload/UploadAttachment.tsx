@@ -60,6 +60,7 @@ const UploadAttachment = ({ onFileListChange }: Props) => {
     <div className="w-full">
       <input
         type="file"
+        accept=".pdf, .hwp, .hwpx, .png, .jpg, .jpeg, .docx, .doc"
         className="hidden"
         ref={fileRef}
         onChange={fileUploadHandler}
