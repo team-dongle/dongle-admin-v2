@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/global.css";
+import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   title: "동글 관리자",
@@ -21,13 +22,19 @@ export const viewport: Viewport = {
   width: "device-width",
 };
 
+const pretendard = localFont({
+  src: "../assets/fonts/PretendardVariable.woff2",
+  style: "normal",
+  variable: "--font-pretendard",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html className="md:h-screen" lang="ko">
+    <html className={`md:h-screen ${pretendard.className}`} lang="ko">
       <body>{children}</body>
     </html>
   );
