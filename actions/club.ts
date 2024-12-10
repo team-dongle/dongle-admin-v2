@@ -18,6 +18,7 @@ export async function createClubDispatcher(
     location: formData.get("location") as string,
     contact: formData.get("contact") as string,
     sns: (formData.get("sns") as string) || undefined,
+    logo: (formData.get("logo") as string) || undefined,
     thumbnail: thumbnail
       ? (JSON.parse(thumbnail) as ClubPayload["thumbnail"])
       : undefined,
@@ -56,6 +57,7 @@ export async function updateClubDispatcher(
     location: formData.get("location") as string,
     contact: formData.get("contact") as string,
     sns: (formData.get("sns") as string) || undefined,
+    logo: (formData.get("logo") as string) || "",
     thumbnail: thumbnail
       ? (JSON.parse(thumbnail) as ClubPayload["thumbnail"])
       : undefined,
