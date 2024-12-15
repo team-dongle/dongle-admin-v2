@@ -16,7 +16,7 @@ const UploadBanner = ({ name }: Props) => {
   const bannerUploadHandler = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       setUploading(true);
       const bannerFile = e.target.files[0];
 

@@ -24,7 +24,7 @@ const UploadThumbnail = ({ onImageChange, defaultValue }: Props) => {
       return;
     }
 
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       const image = e.target.files[0];
 
       if (image.size >= 2e6) {

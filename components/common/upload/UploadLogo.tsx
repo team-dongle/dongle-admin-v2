@@ -15,7 +15,7 @@ const UploadLogo = ({ name, defaultImage }: Props) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       setUploading(true);
       const imageFile = e.target.files[0];
       const imageForm = new FormData();
