@@ -15,4 +15,5 @@ export const adminNavList: NavItem[] = [
 export const clubNavList: NavItem[] = [
   { id: 1, name: "대시보드", href: "/" },
   { id: 2, name: "동아리 관리", href: "/clubs" },
+  { id: 3, name: "활동보고서 관리", href: "/reports" },
 ];

@@ -103,3 +103,7 @@ export interface UploadThumbnailResponse extends GeneralResponse {
 export interface UploadBannerResponse extends GeneralResponse {
   result: { url: string };
 }
+
+export interface UploadReportImageResponse extends GeneralResponse {
+  result: { url: string };
+}

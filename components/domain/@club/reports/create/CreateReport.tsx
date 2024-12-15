@@ -1,32 +1,20 @@
 "use client";
 
-import React, {
-  startTransition,
-  useActionState,
-  useEffect,
-  useState,
-} from "react";
-import { createNoticeDispatcher } from "@/actions/notice";
+import React, { startTransition, useActionState, useState } from "react";
 import FormItem from "@/components/common/form/FormItem";
 import Input from "@/components/common/form/Input";
 import Textarea from "@/components/common/form/Textarea";
 import { useRouter } from "next/navigation";
-import UploadAttachment from "@/components/common/upload/UploadAttachment";
-import { AttachmentType } from "@/types/file";
+import { createReportDispatcher } from "@/actions/report";
+import UploadReportImage from "@/components/common/upload/UploadReportImage";
+import { ReportImageType } from "@/types/file";
 
-const CreateNotice = () => {
+const CreateReport = () => {
   const router = useRouter();
-  const [state, dispatch] = useActionState(createNoticeDispatcher, undefined);
-  const [attachments, setAttachments] = useState<AttachmentType[]>([]);
-
-  useEffect(() => {
-    console.log(state); // TODO: remove unused console.log
-    if (state) {
-      if (!state.ok && state.formError)
-        alert("공지사항 작성중 오류가 발생했습니다.");
-      if (state.ok) window.location.href = "/notices";
-    }
-  }, [state]);
+  const [images, setImages] = useState<ReportImageType[]>([]);
+  const [state, dispatch] = useActionState(createReportDispatcher, {
+    ok: false,
+  });
 
   return (
     <div className="h-full w-full border-y-2 border-y-gray-300 bg-white p-6 shadow max-md:p-4">
@@ -36,46 +24,45 @@ const CreateNotice = () => {
           e.stopPropagation();
 
           const form = new FormData(e.currentTarget);
-          form.append("attachments", JSON.stringify(attachments));
+          form.append("images", JSON.stringify(images));
           startTransition(() => dispatch(form));
         }}
         className="flex h-auto w-full flex-col items-start justify-start gap-6"
       >
         <FormItem
-          label="공지사항 제목"
+          label="활동보고서 제목"
           required={true}
           error={state && state.error?.title}
         >
           <Input
             name="title"
             type="text"
-            placeholder="공지사항 제목을 입력해 주세요."
+            placeholder="활동보고서 제목을 입력해 주세요."
           />
         </FormItem>
         <FormItem
-          label="공지사항 본문"
+          label="활동보고서 본문"
           required={true}
           error={state && state.error?.content}
         >
           <Textarea
             name="content"
-            placeholder="공지사항 본문을 입력해 주세요."
+            placeholder="활동보고서 본문을 입력해 주세요."
           />
         </FormItem>
-        <FormItem label="첨부파일">
-          <UploadAttachment
-            onFileListChange={(files) => setAttachments(files)}
-          />
+        <FormItem label="활동 사진" required>
+          <UploadReportImage onImageChange={(images) => setImages(images)} />
         </FormItem>
         <div className="mt-4 flex h-auto w-full flex-row justify-end gap-4">
           <button
             type="submit"
             className="h-12 w-36 rounded-md bg-sky-500 text-white"
           >
-            공지사항 작성
+            활동보고서 작성
           </button>
           <button
-            onClick={() => router.push("/notices")}
+            type="button"
+            onClick={() => router.push("/reports")}
             className="h-12 w-36 rounded-md bg-gray-200 text-gray-400"
           >
             취소
@@ -86,4 +73,4 @@ const CreateNotice = () => {
   );
 };
 
-export default CreateNotice;
+export default CreateReport;

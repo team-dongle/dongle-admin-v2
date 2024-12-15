@@ -4,6 +4,7 @@ import {
   UploadAttachmentResponse,
   UploadBannerResponse,
   UploadLogoResponse,
+  UploadReportImageResponse,
   UploadThumbnailResponse,
 } from "@/types/response";
 import { fetchData } from "@/apis/fetch";
@@ -33,5 +34,12 @@ export async function uploadBanner(banner: FormData) {
   return await fetchData<UploadBannerResponse>("/upload/banner", {
     method: "POST",
     body: banner,
+  });
+}
+
+export async function uploadReportImage(image: FormData) {
+  return await fetchData<UploadReportImageResponse>("/upload/reportImage", {
+    method: "POST",
+    body: image,
   });
 }

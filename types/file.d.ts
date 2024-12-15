@@ -11,3 +11,7 @@ export interface ThumbnailType {
   url: string;
   alt?: string;
 }
+
+export interface ReportImageType {
+  url: string;
+}

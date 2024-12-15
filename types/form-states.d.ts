@@ -81,3 +81,15 @@ export interface UploadBannerFormState
     href?: string[];
   };
 }
+
+/**
+ *  Report
+ */
+export interface CreateReportFormState
+  extends Exclude<GeneralFormState, "errors"> {
+  errors?: {
+    title?: string[];
+    content?: string[];
+    images?: string[];
+  };
+}

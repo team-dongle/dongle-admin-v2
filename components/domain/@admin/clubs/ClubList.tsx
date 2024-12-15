@@ -41,7 +41,7 @@ const ClubList = ({ clubs }: Props) => {
               <th scope="col" className="min-w-40 px-6 py-4 text-left">
                 모집 기간
               </th>
-              <th scope="col" className="min-w-40 px-6 py-4">
+              <th scope="col" className="min-w-32 px-6 py-4">
                 관리
               </th>
             </tr>
