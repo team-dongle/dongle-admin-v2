@@ -4,12 +4,14 @@ import Section from "@/components/domain/common/dashboard/Section";
 import Notices from "@/components/domain/common/dashboard/Notices";
 import ClubTotalPageView from "@/components/domain/@club/dashboard/analytics/ClubTotalPageView";
 import { getBannerList } from "@/apis/banner";
+import { getNoticeList } from "@/apis/notice";
 
 export default async function Page() {
   const {
     result: { name, club },
   } = await getProfile();
   const bannerList = await getBannerList();
+  const notices = await getNoticeList();
 
   return (
     <>
@@ -24,7 +26,7 @@ export default async function Page() {
           title="공지사항"
           linkTo={`${process.env.NEXT_PUBLIC_SERVICE_URL}/notice`}
         >
-          <Notices />
+          <Notices notices={notices.result.rows} />
         </Section>
         <Section title="동아리 조회수">
           <ClubTotalPageView clubId={club?._id} />

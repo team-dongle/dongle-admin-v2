@@ -1,20 +1,24 @@
+"use client";
+
 import React from "react";
-import { getNoticeList } from "@/apis/notice";
 import Link from "next/link";
 import { formatDate } from "@/utils/date-format";
+import { NoticeType } from "@/types/notice";
 
-const Notices = async () => {
-  const notices = await getNoticeList();
+interface Props {
+  notices: NoticeType[];
+}
 
+const Notices = ({ notices }: Props) => {
   return (
     <div className="h-full w-full overflow-auto">
-      {notices.result.rows.length <= 0 && (
+      {notices.length <= 0 && (
         <div className="flex h-full w-full items-center justify-center">
           <span className="text-gray-400">등록된 공지사항이 없습니다.</span>
         </div>
       )}
       <ul className="flex h-auto w-full flex-col items-start justify-start">
-        {notices.result.rows.slice(0, 3).map((notice) => {
+        {notices.slice(0, 3).map((notice) => {
           return (
             <li key={notice._id} className="w-full border-b border-gray-100">
               <Link
