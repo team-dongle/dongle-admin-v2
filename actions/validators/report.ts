@@ -8,12 +8,15 @@ export const isCreateReportFormValid = (payload: ReportPayload) => {
     content: z
       .string()
       .min(100, { message: "활동보고서 본문은 최소 100자 이상이여야 합니다." }),
-    images: z.object({
-      _id: z.number(),
-      url: z
-        .string()
-        .regex(urlRegexp, { message: "유효한 링크를 입력해 주세요." }),
-    }),
+    images: z
+      .array(
+        z.object({
+          url: z
+            .string()
+            .regex(urlRegexp, { message: "유효한 링크를 입력해 주세요." }),
+        }),
+      )
+      .min(1, { message: "활동 사진은 최소 1개 이상이여야 합니다." }),
   });
 
   return shape.safeParse(payload);
