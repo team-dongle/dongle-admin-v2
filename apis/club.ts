@@ -4,6 +4,7 @@ import { fetchData } from "@/apis/fetch";
 import {
   ClubDetailResponse,
   ClubListResponse,
+  ClubReportListResponse,
   GeneralResponse,
 } from "@/types/response";
 import { ClubPayload } from "@/types/club";
@@ -17,6 +18,12 @@ export async function getClubList() {
 
 export async function getClubDetail(clubId: number) {
   return await fetchData<ClubDetailResponse>(`/clubs/${clubId}`, {
+    method: "GET",
+  });
+}
+
+export async function getClubReports(clubId: number) {
+  return await fetchData<ClubReportListResponse>(`/clubs/${clubId}/reports`, {
     method: "GET",
   });
 }

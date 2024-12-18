@@ -4,6 +4,7 @@ import { CategoryType } from "@/types/category";
 import { UserType } from "@/types/user";
 import { AttachmentType } from "@/types/file";
 import { BannerType } from "@/types/banner";
+import { ReportType } from "@/types/report";
 
 export interface GeneralResponse {
   code: number;
@@ -34,6 +35,10 @@ export interface ClubListResponse extends GeneralResponse {
 
 export interface ClubDetailResponse extends GeneralResponse {
   result: ClubType;
+}
+
+export interface ClubReportListResponse extends GeneralResponse {
+  result: { count: number; rows: ReportType[] };
 }
 
 /**
@@ -83,6 +88,13 @@ export interface CategoryListResponse extends GeneralResponse {
  */
 export interface BannerListResponse extends GeneralResponse {
   result: { count: number; rows: BannerType[] };
+}
+
+/**
+ *  Report
+ */
+export interface ReportListResponse extends GeneralResponse {
+  result: { count: number; rows: ReportType[] };
 }
 
 /**
