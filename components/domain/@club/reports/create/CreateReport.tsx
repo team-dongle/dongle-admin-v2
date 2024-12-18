@@ -1,6 +1,11 @@
 "use client";
 
-import React, { startTransition, useActionState, useState } from "react";
+import React, {
+  startTransition,
+  useActionState,
+  useEffect,
+  useState,
+} from "react";
 import FormItem from "@/components/common/form/FormItem";
 import Input from "@/components/common/form/Input";
 import Textarea from "@/components/common/form/Textarea";
@@ -15,6 +20,11 @@ const CreateReport = () => {
   const [state, dispatch] = useActionState(createReportDispatcher, {
     ok: false,
   });
+
+  useEffect(() => {
+    if (!state.ok && state.formError) alert(state.formError);
+    if (state.ok) window.location.href = "/reports";
+  }, [state]);
 
   return (
     <div className="h-full w-full border-y-2 border-y-gray-300 bg-white p-6 shadow max-md:p-4">
