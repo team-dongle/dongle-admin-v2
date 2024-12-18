@@ -5,7 +5,7 @@ import { BannerPayload } from "@/types/banner";
 export async function getBannerList() {
   return await fetchData<BannerListResponse>("/banners", {
     method: "GET",
-    cache: "no-cache",
+    cache: "no-store",
   });
 }
 
