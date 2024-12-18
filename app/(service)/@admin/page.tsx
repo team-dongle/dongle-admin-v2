@@ -5,8 +5,14 @@ import Banner from "@/components/domain/common/dashboard/Banner";
 import { getBannerList } from "@/apis/banner";
 import { getNoticeList } from "@/apis/notice";
 import TotalPageView from "@/components/domain/@admin/dashboard/analytics/TotalPageView";
+import { cookies } from "next/headers";
 
 export default async function Page() {
+  const cookieStore = await cookies();
+  const role = cookieStore.get("role")?.value;
+
+  if (role !== "ADMIN") return null;
+
   const {
     result: { name },
   } = await getProfile();

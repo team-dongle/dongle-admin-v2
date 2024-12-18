@@ -5,8 +5,14 @@ import Notices from "@/components/domain/common/dashboard/Notices";
 import ClubTotalPageView from "@/components/domain/@club/dashboard/analytics/ClubTotalPageView";
 import { getBannerList } from "@/apis/banner";
 import { getNoticeList } from "@/apis/notice";
+import { cookies } from "next/headers";
 
 export default async function Page() {
+  const cookieStore = await cookies();
+  const role = cookieStore.get("role")?.value;
+
+  if (role !== "CLUB") return null;
+
   const {
     result: { name, club },
   } = await getProfile();
