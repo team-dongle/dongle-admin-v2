@@ -10,13 +10,18 @@ export default async function ReportDetailModal({
 }) {
   const reportId = (await params).reportId;
   const {
-    result: { title, content, images },
+    result: { title, content, images, createdAt },
   } = await getReportDetail(reportId);
 
   return (
     <ModalOverlay>
       <Modal title="활동보고서">
-        <ReportDetail title={title} content={content} images={images} />
+        <ReportDetail
+          title={title}
+          content={content}
+          images={images}
+          createdAt={createdAt}
+        />
       </Modal>
     </ModalOverlay>
   );

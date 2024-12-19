@@ -3,14 +3,16 @@
 import React from "react";
 import ReportImages from "@/components/domain/@club/reports/detail/ReportImages";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/date-format";
 
 interface Props {
   title: string;
   content: string;
   images: string[];
+  createdAt: string | Date;
 }
 
-const ReportDetail = ({ title, content, images }: Props) => {
+const ReportDetail = ({ title, content, images, createdAt }: Props) => {
   const router = useRouter();
 
   return (
@@ -18,7 +20,7 @@ const ReportDetail = ({ title, content, images }: Props) => {
       <ReportImages images={images} />
       <div className="flex flex-col gap-1">
         <h2 className="text-2xl font-bold text-zinc-700">{title}</h2>
-        <p className="text-lg text-zinc-500">2024/12/19</p>
+        <p className="text-lg text-zinc-500">{formatDate(createdAt)}</p>
       </div>
       <div className="h-auto w-full overflow-y-auto">
         {content.split("\n").map((line, idx) => (
