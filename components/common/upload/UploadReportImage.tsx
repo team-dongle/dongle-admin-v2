@@ -57,7 +57,7 @@ const UploadReportImage = ({ onImageChange }: Props) => {
         className="hidden"
         ref={imageRef}
       />
-      <ul className="flex h-48 w-full flex-row items-center justify-start gap-4 rounded-md border border-gray-200 p-6">
+      <ul className="flex min-h-48 w-full flex-row flex-wrap items-center justify-start gap-4 rounded-md border border-gray-200 p-6">
         {images.length <= 0 && (
           <li className="flex h-full w-full items-center justify-center text-gray-500">
             업로드된 이미지가 없습니다.
