@@ -12,5 +12,5 @@ export interface ReportType {
 export interface ReportPayload {
   title: string;
   content: string;
-  images: { _id: number; url: string }[];
+  images: { url: string }[];
 }

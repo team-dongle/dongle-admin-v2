@@ -1,9 +1,19 @@
 import { ReportPayload } from "@/types/report";
 import { fetchData } from "@/apis/fetch";
-import { GeneralResponse, ReportListResponse } from "@/types/response";
+import {
+  GeneralResponse,
+  ReportDetailResponse,
+  ReportListResponse,
+} from "@/types/response";
 
 export async function getReportList() {
   return await fetchData<ReportListResponse>("/reports", { method: "GET" });
+}
+
+export async function getReportDetail(reportId: number) {
+  return await fetchData<ReportDetailResponse>(`/reports/${reportId}`, {
+    method: "GET",
+  });
 }
 
 export async function createReport(payload: ReportPayload) {

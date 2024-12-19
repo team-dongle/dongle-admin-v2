@@ -97,6 +97,17 @@ export interface ReportListResponse extends GeneralResponse {
   result: { count: number; rows: ReportType[] };
 }
 
+export interface ReportDetailResponse extends GeneralResponse {
+  result: {
+    _id: number;
+    title: string;
+    content: string;
+    images: string[];
+    clubId: number;
+    createdAt: string | Date;
+  };
+}
+
 /**
  *  Upload
  */

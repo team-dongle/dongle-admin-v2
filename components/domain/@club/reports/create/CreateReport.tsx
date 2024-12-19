@@ -34,7 +34,10 @@ const CreateReport = () => {
           e.stopPropagation();
 
           const form = new FormData(e.currentTarget);
-          form.append("images", JSON.stringify(images));
+          form.append(
+            "images",
+            JSON.stringify(images.map((image) => ({ url: image.url }))),
+          );
           startTransition(() => dispatch(form));
         }}
         className="flex h-auto w-full flex-col items-start justify-start gap-6"
@@ -60,7 +63,11 @@ const CreateReport = () => {
             placeholder="활동보고서 본문을 입력해 주세요."
           />
         </FormItem>
-        <FormItem label="활동 사진" required>
+        <FormItem
+          label="활동 사진"
+          required
+          error={state && state.error?.images}
+        >
           <UploadReportImage onImageChange={(images) => setImages(images)} />
         </FormItem>
         <div className="mt-4 flex h-auto w-full flex-row justify-end gap-4">

@@ -13,6 +13,7 @@ interface Props {
   reports: ReportType[];
 }
 
+/* TODO: 활동 보고서 제목 hover시 text-underline */
 const ReportList = ({ reports }: Props) => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -25,9 +26,6 @@ const ReportList = ({ reports }: Props) => {
             <tr>
               <th scope="col" className="px-6 py-4 text-left">
                 제목
-              </th>
-              <th scope="col" className="min-w-12 px-6 py-4 text-left">
-                동아리 이름
               </th>
               <th scope="col" className="min-w-12 px-6 py-4 text-left">
                 작성일
@@ -60,12 +58,10 @@ const ReportList = ({ reports }: Props) => {
                       prefetch={false}
                       scroll={false}
                       href={`/reports/detail/${report._id}`}
+                      className="hover:underline"
                     >
                       {report.title}
                     </Link>
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-gray-400">
-                    {report.club.name}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-gray-400">
                     {formatDate(report.createdAt)}

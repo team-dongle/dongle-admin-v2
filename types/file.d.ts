@@ -13,5 +13,6 @@ export interface ThumbnailType {
 }
 
 export interface ReportImageType {
+  id?: string;
   url: string;
 }

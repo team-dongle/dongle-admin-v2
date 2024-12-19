@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReportImageType } from "@/types/file";
 import { uploadReportImage } from "@/apis/upload";
+import CloseIcon from "@/assets/icons/close-icon.svg";
+import { v4 } from "uuid";
 
 interface Props {
   onImageChange: (images: ReportImageType[]) => void;
@@ -18,6 +20,11 @@ const UploadReportImage = ({ onImageChange }: Props) => {
   }, [images]);
 
   const imageUploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (images.length >= 3) {
+      alert("활동보고서 사진은 최대 3개까지 업로드 가능합니다.");
+      return;
+    }
+
     if (e.target.files && e.target.files.length > 0) {
       setUploading(true);
       const file = e.target.files[0];
@@ -33,7 +40,7 @@ const UploadReportImage = ({ onImageChange }: Props) => {
         return;
       }
 
-      setImages((prev) => [...prev, _response.result]);
+      setImages((prev) => [...prev, { id: v4(), url: _response.result.url }]);
       setUploading(false);
       return;
     }
@@ -60,8 +67,18 @@ const UploadReportImage = ({ onImageChange }: Props) => {
           images.map((image, index) => (
             <li
               key={index}
-              className="relative h-36 w-36 border border-gray-100"
+              className="relative h-36 w-36 border border-gray-200"
             >
+              <button
+                onClick={() =>
+                  setImages((prev) =>
+                    prev.filter((prevImage) => prevImage.id !== image.id),
+                  )
+                }
+                className="absolute right-[-12px] top-[-6px] flex h-6 w-6 items-center justify-center rounded-3xl border bg-white shadow-xl"
+              >
+                <CloseIcon width={16} height={16} className="stroke-red-500" />
+              </button>
               <img
                 alt="활동 사진"
                 src={image.url}
